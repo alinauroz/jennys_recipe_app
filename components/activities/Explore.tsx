@@ -12,6 +12,7 @@ export default class Explore extends React.Component {
             <View style={styles.container}>
                 <TextInput
                     style={styles.inp}
+                    placeholder="Search"
                 />
             </View>
         )
@@ -25,6 +26,11 @@ const styles = StyleSheet.create({
         padding: 15
     },
     inp: {
-        
+        backgroundColor: "lightgrey",
+        padding: 10,
+        borderRadius: 5,
+        width: Dimensions.get('window').width - 30,
+        height: 35,
+        fontSize: 16
     }
 });
