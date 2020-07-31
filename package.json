@@ -12,6 +12,7 @@
   "dependencies": {
     "react": "16.13.1",
     "react-native": "0.63.0",
+    "react-native-easy-markdown": "^2.0.0",
     "react-native-gesture-handler": "^1.7.0",
     "react-native-material-bottom-navigation": "^1.0.5",
     "react-native-paper": "^4.0.1",

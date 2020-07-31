@@ -7,6 +7,9 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Explore from './components/activities/Explore'
 import Recipies from './components/activities/Recipies'
 import Upload from './components/activities/Upload'
+import Viewer from './components/activities/Viewer'
+
+import data from './constants/recipies'
 
 
 
@@ -56,4 +59,14 @@ const TabNavigator = createMaterialBottomTabNavigator(
     },  
 );  
   
-export default createAppContainer(TabNavigator);  
+//export default createAppContainer(TabNavigator);  
+
+export default class App extends React.Component {
+    render () {
+        return <Viewer
+            cover={data[0].image}
+            title = {"White Tea"}
+        />
+    }
+}
+
