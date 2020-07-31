@@ -1,18 +1,37 @@
 import React from 'react'
-import {Text, ScrollView, View, Dimensions, StyleSheet} from 'react-native'
+import {Text, ScrollView, View, Dimensions, StyleSheet, Alert} from 'react-native'
 
 import RecipeCard from '../cards/recipe'
+import Viewer from './Viewer'
+
 import data from '../../constants/recipies'
 
-export default class Recipies extends React.Component {
+export default class Recipies extends React.Component<any, any> {
     
     constructor(props: any) {
         super(props)
+        this.state = {
+            view_recipie: false
+        }
+    }
+
+    showRecipie = async (recipie: any) => {
+        this.setState({
+            show_name: recipie.name,
+            show_cover: recipie.cover,
+            show_direction: recipie.recipie,
+            view_recipie: true
+        })
+    }
+
+    hideRecipieViewer = async () =>{
+        this.setState({view_recipie: false})
     }
 
     render () {
         return (
-            <ScrollView>
+            <>
+            <ScrollView style={{display: this.state.view_recipie ? "none" : "flex"}}>
             <View style={styles.container}>
                 {
                     data.map(recipe => {
@@ -20,6 +39,7 @@ export default class Recipies extends React.Component {
                             <RecipeCard 
                                 cover={recipe.image}
                                 name={recipe.name}
+                                onpress = {() => this.showRecipie(recipe)}
                             />
                         )
                     })
@@ -36,6 +56,15 @@ export default class Recipies extends React.Component {
                 }
             </View>
             </ScrollView>
+            <ScrollView style={{display: this.state.view_recipie ? "flex" : "none"}}>
+                <Viewer 
+                    name = {this.state.show_name}
+                    cover = {this.state.show_cover}
+                    directions = {this.state.show_direction}
+                    hide = {this.hideRecipieViewer}
+                />
+            </ScrollView>
+            </>
         )
     }
 }

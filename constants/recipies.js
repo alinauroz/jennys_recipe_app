@@ -2,12 +2,12 @@ export default data = [
     {
         name: "Tea",
         image: "https://s23991.pcdn.co/wp-content/uploads/fly-images/102645/spiced-sweet-milk-tea-recipe-fp-400x400-c.jpg",
-        recipe: "Step1\nStep2\nStep3"
+        recipie: "Step1\nStep2\nStep3"
     },
     {
         name: "Lemon Pepper Chicken",
         image: "https://hips.hearstapps.com/delish/assets/17/35/1504195270-lemon-pepper-chicken.jpg",
-        recipe: "Step1\nStep2\nStep3"
+        recipie: "Step1\nStep2\nStep3"
     },
     {
         name: "Roasted Chicked Cassarole",

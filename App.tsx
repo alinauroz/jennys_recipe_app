@@ -59,14 +59,14 @@ const TabNavigator = createMaterialBottomTabNavigator(
     },  
 );  
   
-//export default createAppContainer(TabNavigator);  
+export default createAppContainer(TabNavigator);  
 
-export default class App extends React.Component {
-    render () {
-        return <Viewer
-            cover={data[0].image}
-            title = {"White Tea"}
-        />
-    }
-}
+//export default class App extends React.Component {
+//    render () {
+//        return <Viewer
+//            cover={data[0].image}
+//            title = {"White Tea"}
+//        />
+//    }
+//}
 

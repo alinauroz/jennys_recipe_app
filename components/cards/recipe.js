@@ -7,10 +7,10 @@ export default class RecipeCard extends React.Component {
     }
     render () {
         return (
-            <View style = {styles.container}>
+            <View style = {styles.container} onPress={() => alert(1)}>
                 <ImageBackground source = {{uri: this.props.cover}} style={styles.bg}>
-                    <View style={styles.fg}>
-                        <Text style={styles.fg_text}>{this.props.name}</Text>
+                    <View style={styles.fg} onPress={() => alert(1) }>
+                        <Text onPress={this.props.onpress} style={styles.fg_text}>{this.props.name}</Text>
                     </View>
                 </ImageBackground>
             </View>

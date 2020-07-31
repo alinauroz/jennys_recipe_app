@@ -7,27 +7,35 @@ export default class Viewer extends React.Component {
     constructor(props) {
         super (props)
         console.log(props)
+        this.state = {
+            title: this.props.title,
+            cover: this.props.cover
+        }
+
     }
+
+    static getDerivedStateFromProps = newProps => newProps;
+
     render () {
         return (
             <ScrollView style={styles.container}>
-                <Text onPress = {() => alert("hello")} style={styles.back}>Back</Text>
-                <Text style={styles.title}>{this.props.title}</Text>
-                <ImageBackground source = {{uri: this.props.cover}} style={styles.cover} />
+                <Text onPress = {this.props.hide} style={styles.back}>Back</Text>
+                <Text style={styles.title}>{this.state.title}</Text>
+                <ImageBackground source = {{uri: this.state.cover}} style={styles.cover} />
                 
                 <Markdown>
                     {
-                        '## Ingridients\n\n' +
-
-                        '* Tea Leaves \n' +
-                        '* Milk \n' +
-                        '* Sugar _(Optional)_ \n\n'
+                        this.state.direction
                     }
                 </Markdown>
 
                 <TouchableOpacity style={styles.add_to_button}>
                     <Text style={styles.button_text}>
-                        <Icon style={styles.button_text} name="heart-outline"></Icon> Hello
+                        {
+                            this.state.liked || true?
+                            <><Icon style={styles.button_text} name="heart"></Icon> Remove</>:
+                            <><Icon style={styles.button_text} name="heart-outline"></Icon> Save</>
+                        }
                     </Text>
                 </TouchableOpacity>
             </ScrollView>
