@@ -8,11 +8,13 @@ import Explore from './components/activities/Explore'
 import Recipies from './components/activities/Recipies'
 import Upload from './components/activities/Upload'
 
+
+
 const styles = StyleSheet.create({  
     container: {  
         flex: 1,  
         justifyContent: 'center',  
-        alignItems: 'center'  
+        alignItems: 'center'
     },  
 });  
 const TabNavigator = createMaterialBottomTabNavigator(  
