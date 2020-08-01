@@ -37,7 +37,7 @@ class Viewer extends React.Component {
 
                 <TouchableOpacity 
                     style={styles.add_to_button}
-                    onPress = {() => this.props.addToSaved(1)}
+                    onPress = {() => this.props.addToSaved(this.props.id)}
                 >
                     <Text style={styles.button_text}>
                         {
