@@ -8,6 +8,7 @@ import Explore from './components/activities/Explore'
 import Recipies from './components/activities/Recipies'
 import Upload from './components/activities/Upload'
 import Viewer from './components/activities/Viewer'
+import Account from './components/activities/Account'
 
 import data from './constants/recipies'
 
@@ -41,7 +42,7 @@ const TabNavigator = createMaterialBottomTabNavigator(
                         <Icon style={[{color: tintColor}]} size={25} name={'ios-pizza'}/>  
                     </View>),
             }  
-        },  
+        },   
         Image: { screen: Upload,
             navigationOptions:{
                 tabBarLabel:'Upload',  
@@ -50,8 +51,16 @@ const TabNavigator = createMaterialBottomTabNavigator(
                         <Icon style={[{color: tintColor}]} size={25} name={'ios-arrow-up'}/>  
                     </View>)
             }  
-        },  
-        
+        },
+        Account: { screen: Account,
+            navigationOptions:{  
+                tabBarLabel:'Account',  
+                tabBarIcon: ({ tintColor }) => (  
+                    <View>  
+                        <Icon style={[{color: tintColor}]} size={25} name={'ios-person'}/>  
+                    </View>),
+            }  
+        }, 
     },  
     {  
       initialRouteName: "Home",  

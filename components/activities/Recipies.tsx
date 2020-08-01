@@ -68,6 +68,7 @@ class Recipies extends React.Component<any, any> {
                     directions = {this.state.show_direction}
                     id = {this.state.show_id}
                     hide = {this.hideRecipieViewer}
+                    saved = {this.props.saved}
                 />
             </ScrollView>
             </>

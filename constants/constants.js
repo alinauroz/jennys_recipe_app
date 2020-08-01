@@ -1,2 +1,3 @@
 export const SAVE_RECIPIE = "SAVE_RECIPIE"
 export const REMOVE_RECIPIE = "REMOVE_RECIPIE"
+export const ACCOUNT = "ACCOUNT"

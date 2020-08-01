@@ -13,12 +13,15 @@ class Viewer extends React.Component {
         this.state = {
             title: this.props.title,
             cover: this.props.cover,
-            fav: (this.props.saved && this.props.saved.indexOf(props.id) > -1 ? true : false)
+            fav: (this.props.saved && this.props.saved.indexOf(props.id) > -1 ? true : false),
+            saved: this.props.saved
         }
-
     }
 
-    static getDerivedStateFromProps = newProps => {
+    static getDerivedStateFromProps = (newProps, state) => {
+        //if ("id" in newProps) {
+        //    if ()
+        //}
         return newProps
     }
 
@@ -33,8 +36,13 @@ class Viewer extends React.Component {
         }
     }
 
-    render () {
+    getButton = () => {
+        return this.props.saved && this.props.saved.indexOf(this.props.id) > -1 ?
+                            <><Icon style={styles.button_text} name="heart"></Icon> Remove</>:
+                            <><Icon style={styles.button_text} name="heart-outline"></Icon> Save</>
+    }
 
+    render () {
         return (
             <ScrollView style={styles.container}>
                 <Text onPress = {this.props.hide} style={styles.back}>Back</Text>
@@ -53,9 +61,7 @@ class Viewer extends React.Component {
                 >
                     <Text style={styles.button_text}>
                         {
-                            this.state.liked || true?
-                            <><Icon style={styles.button_text} name="heart"></Icon> Remove</>:
-                            <><Icon style={styles.button_text} name="heart-outline"></Icon> Save</>
+                            this.getButton()
                         }
                     </Text>
                 </TouchableOpacity>
