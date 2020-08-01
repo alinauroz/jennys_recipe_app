@@ -11,6 +11,8 @@ import Viewer from './components/activities/Viewer'
 
 import data from './constants/recipies'
 
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
 
 
 const styles = StyleSheet.create({  
@@ -58,15 +60,18 @@ const TabNavigator = createMaterialBottomTabNavigator(
       barStyle: { backgroundColor: '#3BAD87' },  
     },  
 );  
-  
-export default createAppContainer(TabNavigator);  
 
-//export default class App extends React.Component {
-//    render () {
-//        return <Viewer
-//            cover={data[0].image}
-//            title = {"White Tea"}
-//        />
-//    }
-//}
+const mapStateToProps = (state: any) => {
+    return {count: state.count}
+  };
+  
+  const mapDispatchToProps = (dispatch: any) => {
+    return {
+        
+    }
+  }
+
+//export default createAppContainer(TabNavigator);  
+
+export default connect(mapStateToProps, mapDispatchToProps)(createAppContainer(TabNavigator))
 
