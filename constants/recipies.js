@@ -19,6 +19,18 @@ export default data = [
     },
     {
         name: "Seasme Ginger Chicken",
-        image: "https://www.sprinklesandsprouts.com/wp-content/uploads/2019/10/Takeout-Style-Sesame-Ginger-Chicken-SQ.jpg"
+        image: "https://www.sprinklesandsprouts.com/wp-content/uploads/2019/10/Takeout-Style-Sesame-Ginger-Chicken-SQ.jpg",
+        recipie: "# Ingridients \n\n"
+                + "- Chiken (1 kg)\n"
+                + "- Sesme\n"
+                + "- Yogurt (1 kg)\n"
+                + "- Ginger\n"
+                + "- Green Pepper _(Optional)_\n\n"
+                + "# Directions\n\n"
+                + "Add the oil in a stock pot and sauté the onion, ginger and garlic, over medium heat for a few minutes.\n\n"
+                + "Add the whole spices, celery and carrots and chargrilled bell peppers along with the lamb bones. Increase the heat and stir for a while till the bones are browned.\n\n"
+                + "Now add the salt, stir thoroughly and pour in the warm water gradually.\n\n"
+                + "Simmer the contents for an hour over low heat.\n\n"
+                + "Strain through a `muslin’ cloth check the seasoning and serve in bowls garnished with some reserved dices of chargrilled pepper and lamb.\n\n"
     }
 ]

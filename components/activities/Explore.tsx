@@ -3,16 +3,19 @@ import {View, ScrollView, Text, TextInput, StyleSheet, Dimensions, Alert} from '
 
 import data from "../../constants/recipies"
 import RecipeCard from '../cards/recipe'
+import Viewer from './Viewer'
 
 interface RecipieInterface {
     name: string,
     image: String,
-    recipie: String
+    recipie: String,
+    view_recipie: boolean
 }
 
 interface ExploreInterface {
     query: string
-    recipies: any[]
+    recipies: any[],
+    view_recipie: boolean
 }
 
 export default class Explore extends React.Component <ExploreInterface, ExploreInterface> {
@@ -21,7 +24,8 @@ export default class Explore extends React.Component <ExploreInterface, ExploreI
         super(props)
         this.state = {
             query: "",
-            recipies: []
+            recipies: [],
+            view_recipie: false
         }
     }
 
@@ -43,7 +47,8 @@ export default class Explore extends React.Component <ExploreInterface, ExploreI
 
     render () {
         return (
-            <View style={styles.container}>
+            <>
+            <View style={{...styles.container, display: this.state.view_recipie ? "none" : "flex"}}>
                 <TextInput
                     style={styles.inp}
                     placeholder="Search"
@@ -57,6 +62,7 @@ export default class Explore extends React.Component <ExploreInterface, ExploreI
                                 <RecipeCard 
                                     cover={recipe.image}
                                     name={recipe.name}
+                                    onpress = {() => this.showRecipie(recipe)}
                                 />
                             )
                         })
@@ -64,6 +70,7 @@ export default class Explore extends React.Component <ExploreInterface, ExploreI
                 </View>
                 </ScrollView>
             </View>
+            </>
         )
     }
 }

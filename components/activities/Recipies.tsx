@@ -18,7 +18,7 @@ export default class Recipies extends React.Component<any, any> {
     showRecipie = async (recipie: any) => {
         this.setState({
             show_name: recipie.name,
-            show_cover: recipie.cover,
+            show_cover: recipie.image,
             show_direction: recipie.recipie,
             view_recipie: true
         })
@@ -58,7 +58,7 @@ export default class Recipies extends React.Component<any, any> {
             </ScrollView>
             <ScrollView style={{display: this.state.view_recipie ? "flex" : "none"}}>
                 <Viewer 
-                    name = {this.state.show_name}
+                    title = {this.state.show_name}
                     cover = {this.state.show_cover}
                     directions = {this.state.show_direction}
                     hide = {this.hideRecipieViewer}

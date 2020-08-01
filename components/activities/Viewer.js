@@ -1,12 +1,11 @@
 import React from 'react'
 import {View, ScrollView, TouchableOpacity, StyleSheet, Dimensions, Text, ImageBackground} from 'react-native'
-import Markdown from 'react-native-easy-markdown';
+import Markdown from 'react-native-markdown-display';
 import Icon from 'react-native-vector-icons/Ionicons';  
 
 export default class Viewer extends React.Component {
     constructor(props) {
         super (props)
-        console.log(props)
         this.state = {
             title: this.props.title,
             cover: this.props.cover
@@ -14,7 +13,10 @@ export default class Viewer extends React.Component {
 
     }
 
-    static getDerivedStateFromProps = newProps => newProps;
+    static getDerivedStateFromProps = newProps => {
+        console.log(newProps);
+        return newProps
+    }
 
     render () {
         return (
@@ -23,11 +25,11 @@ export default class Viewer extends React.Component {
                 <Text style={styles.title}>{this.state.title}</Text>
                 <ImageBackground source = {{uri: this.state.cover}} style={styles.cover} />
                 
-                <Markdown>
-                    {
-                        this.state.direction
-                    }
-                </Markdown>
+                <View style={{flexDirection: 'row', width: Dimensions.get('window').width-30}}>
+                    <Markdown style={{flex: 1}}>
+                        {this.state.directions}
+                    </Markdown>
+                </View>
 
                 <TouchableOpacity style={styles.add_to_button}>
                     <Text style={styles.button_text}>
