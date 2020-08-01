@@ -1,9 +1,13 @@
 import React from 'react'
-import {View, ScrollView, TouchableOpacity, StyleSheet, Dimensions, Text, ImageBackground} from 'react-native'
+import {View, ScrollView, TouchableOpacity, StyleSheet, Dimensions, Text, ImageBackground, Alert} from 'react-native'
 import Markdown from 'react-native-markdown-display';
 import Icon from 'react-native-vector-icons/Ionicons';  
 
-export default class Viewer extends React.Component {
+import {connect} from 'react-redux'
+import {save} from '../../actions/save_action.js'
+import {remove} from '../../actions/remove_action.js'
+
+class Viewer extends React.Component {
     constructor(props) {
         super (props)
         this.state = {
@@ -31,7 +35,10 @@ export default class Viewer extends React.Component {
                     </Markdown>
                 </View>
 
-                <TouchableOpacity style={styles.add_to_button}>
+                <TouchableOpacity 
+                    style={styles.add_to_button}
+                    onPress = {() => this.props.addToSaved(1)}
+                >
                     <Text style={styles.button_text}>
                         {
                             this.state.liked || true?
@@ -96,3 +103,16 @@ const styles = StyleSheet.create({
         textAlign: "center"
     }
 });
+
+const mapStateToProps = (state) => {
+    return {"saved" : state.saved}
+};
+  
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addToSaved : (recipeId) => dispatch(save(recipeId)),
+        removeFromSaved: (recipeId) => dispatch(remove(recipeId)),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Viewer)

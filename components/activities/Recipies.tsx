@@ -6,7 +6,11 @@ import Viewer from './Viewer'
 
 import data from '../../constants/recipies'
 
-export default class Recipies extends React.Component<any, any> {
+import {connect} from 'react-redux'
+
+import {save} from '../../actions/save_action.js'
+
+class Recipies extends React.Component<any, any> {
     
     constructor(props: any) {
         super(props)
@@ -82,3 +86,15 @@ const styles = StyleSheet.create({
         margin: 10
     }
 })
+
+const mapStateToProps = (state:any) => {
+    return {"saved" : state.saved}
+};
+  
+const mapDispatchToProps = (dispatch:any) => {
+    return {
+        addToSaved : (recipeId:any) => dispatch(save(recipeId))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Recipies)

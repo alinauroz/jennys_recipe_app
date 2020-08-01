@@ -6,8 +6,10 @@ const initialState = {
 
 const saveReducer = (state = initialState, action) => {
     switch (action.type) {
-        case SAVE_RECIPIE:
-            return {...state, saved : state.saved.push(action.payload)}
+        case SAVE_RECIPIE: {
+            state.saved.push(action.payload)
+            return {...state, saved : state.saved}
+        }
         case REMOVE_RECIPIE: {
             let saved = state.saved;
             if (saved.indexOf(action.payload) <= -1) return state;
