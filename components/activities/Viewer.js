@@ -12,17 +12,29 @@ class Viewer extends React.Component {
         super (props)
         this.state = {
             title: this.props.title,
-            cover: this.props.cover
+            cover: this.props.cover,
+            fav: (this.props.saved && this.props.saved.indexOf(props.id) > -1 ? true : false)
         }
 
     }
 
     static getDerivedStateFromProps = newProps => {
-        console.log(newProps);
         return newProps
     }
 
+    save_unsave = (id) => {
+        if (! this.state.fav) {
+            this.props.addToSaved(id);
+            this.setState({fav: true});
+        }
+        else {
+            this.props.removeFromSaved(id);
+            this.setState({fav: false});
+        }
+    }
+
     render () {
+
         return (
             <ScrollView style={styles.container}>
                 <Text onPress = {this.props.hide} style={styles.back}>Back</Text>
@@ -37,7 +49,7 @@ class Viewer extends React.Component {
 
                 <TouchableOpacity 
                     style={styles.add_to_button}
-                    onPress = {() => this.props.addToSaved(this.props.id)}
+                    onPress = {() => this.save_unsave(this.props.id)}
                 >
                     <Text style={styles.button_text}>
                         {

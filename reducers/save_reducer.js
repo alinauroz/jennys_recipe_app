@@ -5,8 +5,10 @@ const initialState = {
 }
 
 const saveReducer = (state = initialState, action) => {
+    console.log(state)
     switch (action.type) {
         case SAVE_RECIPIE: {
+            if (state.saved.indexOf(action.payload) > -1) return state;
             state.saved.push(action.payload)
             return {...state, saved : state.saved}
         }

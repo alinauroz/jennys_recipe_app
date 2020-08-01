@@ -24,6 +24,7 @@ class Recipies extends React.Component<any, any> {
             show_name: recipie.name,
             show_cover: recipie.image,
             show_direction: recipie.recipie,
+            show_id: recipie.id,
             view_recipie: true
         })
     }
@@ -65,6 +66,7 @@ class Recipies extends React.Component<any, any> {
                     title = {this.state.show_name}
                     cover = {this.state.show_cover}
                     directions = {this.state.show_direction}
+                    id = {this.state.show_id}
                     hide = {this.hideRecipieViewer}
                 />
             </ScrollView>
