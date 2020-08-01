@@ -88,6 +88,14 @@ export default class Explore extends React.Component <ExploreInterface, ExploreI
                     }
                 </View>
                 </ScrollView>
+                <ScrollView style={{display: this.state.view_recipie ? "flex" : "none"}}>
+                    <Viewer 
+                        title = {this.state.show_name}
+                        cover = {this.state.show_cover}
+                        directions = {this.state.show_direction}
+                        hide = {this.hideRecipieViewer}
+                    />
+                </ScrollView>
             </View>
             </>
         )
