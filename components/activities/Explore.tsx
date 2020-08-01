@@ -15,7 +15,10 @@ interface RecipieInterface {
 interface ExploreInterface {
     query: string
     recipies: any[],
-    view_recipie: boolean
+    view_recipie: boolean,
+    show_name: string,
+    show_cover: string,
+    show_direction: string
 }
 
 export default class Explore extends React.Component <ExploreInterface, ExploreInterface> {
@@ -25,7 +28,10 @@ export default class Explore extends React.Component <ExploreInterface, ExploreI
         this.state = {
             query: "",
             recipies: [],
-            view_recipie: false
+            view_recipie: false,
+            show_cover: "",
+            show_direction: "",
+            show_name: ""
         }
     }
 
@@ -43,6 +49,19 @@ export default class Explore extends React.Component <ExploreInterface, ExploreI
         this.setState({query: e});
         if (e == "") return this.setState({recipies: []})
         this.search();
+    }
+
+    showRecipie = async (recipie: any) => {
+        this.setState({
+            show_name: recipie.name,
+            show_cover: recipie.image,
+            show_direction: recipie.recipie,
+            view_recipie: true
+        })
+    }
+
+    hideRecipieViewer = async () =>{
+        this.setState({view_recipie: false})
     }
 
     render () {
