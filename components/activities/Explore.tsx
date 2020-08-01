@@ -29,9 +29,9 @@ export default class Explore extends React.Component <ExploreInterface, ExploreI
             query: "",
             recipies: [],
             view_recipie: false,
-            show_cover: "",
-            show_direction: "",
-            show_name: ""
+            show_cover: "abc",
+            show_direction: "abc",
+            show_name: "abc"
         }
     }
 
@@ -77,6 +77,7 @@ export default class Explore extends React.Component <ExploreInterface, ExploreI
                 <View style={styles.container2}>
                     {
                         this.state.recipies.map(recipe => {
+                            console.log(recipe)
                             return (
                                 <RecipeCard 
                                     cover={recipe.image}
@@ -88,6 +89,8 @@ export default class Explore extends React.Component <ExploreInterface, ExploreI
                     }
                 </View>
                 </ScrollView>
+                </View>
+
                 <ScrollView style={{display: this.state.view_recipie ? "flex" : "none"}}>
                     <Viewer 
                         title = {this.state.show_name}
@@ -96,7 +99,6 @@ export default class Explore extends React.Component <ExploreInterface, ExploreI
                         hide = {this.hideRecipieViewer}
                     />
                 </ScrollView>
-            </View>
             </>
         )
     }

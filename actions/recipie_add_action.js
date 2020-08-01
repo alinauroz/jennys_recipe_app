@@ -1,8 +1,8 @@
-import {ADD_RECIPIE} from "../constants/constants"
+import {SAVE_RECIPIE} from "../constants/constants"
 
-export function addRecipie(recipie) { 
+export function save(recipie) { 
     return {
-        type : ADD_RECIPIE,
+        type : SAVE_RECIPIE,
         payload : recipie
     }
 }
