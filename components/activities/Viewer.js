@@ -60,7 +60,6 @@ class Viewer extends React.Component {
         return (
             <ScrollView style={styles.container}>
                 <Text onPress = {this.props.hide} style={styles.back}>Back</Text>
-                <Text>{this.props.saved}</Text>
                 <Text style={styles.title}>{this.state.title}</Text>
                 <ImageBackground source = {{uri: this.state.cover}} style={styles.cover} />
                 
