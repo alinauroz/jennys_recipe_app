@@ -9,11 +9,12 @@ class Account extends React.Component {
     constructor (props) {
         super(props)
         this.state = {
-
+            msg : ""
         }
     }
 
     login = async () => {
+        await this.setState({msg: ""})
         let username = this.state.username;
         let password = this.state.pass;
         let token = await fetch("http://localhost:8080/login?username=" + username + "&pass=" + password);
@@ -34,9 +35,23 @@ class Account extends React.Component {
         this.setState({pass: text})
     }
 
+    signOut = () => {
+        this.setState({msg: ""});
+        this.props.updateToken("");
+    }
+
     render () {
-        if  (this.state.loggedIn) {
-            return <></>
+        if  (this.props.token) {
+            return (
+                <>
+                    <TouchableOpacity 
+                        style={styles.signout_button}
+                        onPress = {this.signOut}
+                    >
+                        <Text style={styles.signout_button_text}>Sign Out</Text>
+                    </TouchableOpacity>
+                </>
+            )
         }
         else {
             return (
@@ -88,6 +103,19 @@ const styles = StyleSheet.create({
     },
     login_button_text: {
         color: "white",
+        fontWeight: "bold",
+        textAlign: "center"
+    },
+    signout_button: {
+        width: 150,
+        height: 50,
+        padding: 15,
+        backgroundColor: "lightgrey",
+        marginTop: 100,
+        marginLeft: Dimensions.get('window').width/2 - 80,
+        borderRadius: 5,
+    },
+    signout_button_text: {
         fontWeight: "bold",
         textAlign: "center"
     }
