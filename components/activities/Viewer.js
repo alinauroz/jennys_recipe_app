@@ -1,21 +1,48 @@
 import React from 'react'
-import {View, ScrollView, TouchableOpacity, StyleSheet, Dimensions, Text, ImageBackground} from 'react-native'
+import {View, ScrollView, TouchableOpacity, StyleSheet, Dimensions, Text, ImageBackground, Alert} from 'react-native'
 import Markdown from 'react-native-markdown-display';
 import Icon from 'react-native-vector-icons/Ionicons';  
 
-export default class Viewer extends React.Component {
+import {connect} from 'react-redux'
+import {save} from '../../actions/save_action.js'
+import {remove} from '../../actions/remove_action.js'
+
+class Viewer extends React.Component {
     constructor(props) {
         super (props)
         this.state = {
             title: this.props.title,
-            cover: this.props.cover
+            cover: this.props.cover,
+            fav: (this.props.saved && this.props.saved.indexOf(props.id) >= -1 ? true : false),
+            saved: this.props.saved
         }
-
     }
 
-    static getDerivedStateFromProps = newProps => {
-        console.log(newProps);
+    static getDerivedStateFromProps = (newProps, state) => {
+        //if ("id" in newProps) {
+        //    if ()
+        //}
         return newProps
+    }
+
+    save_unsave = (id) => {
+        if (this.props.saved && this.props.saved.indexOf(this.props.id) == -1) {
+            console.log("saving")
+            this.props.addToSaved(id);
+        }
+        else {
+            this.props.removeFromSaved(id);
+        }
+        this.render()
+    }
+
+    getButton = () => {
+        console.log("**************")
+        console.log(this.props.saved.indexOf(this.props.id), this.props.saved)
+        console.log("_______________")
+        return this.props.saved && this.props.saved.indexOf(this.props.id) == -1 ?
+                            <><Icon style={styles.button_text} name="heart-outline"></Icon> Save</>
+                            : <><Icon style={styles.button_text} name="heart"></Icon> Remove</>
     }
 
     render () {
@@ -31,12 +58,15 @@ export default class Viewer extends React.Component {
                     </Markdown>
                 </View>
 
-                <TouchableOpacity style={styles.add_to_button}>
+                <TouchableOpacity 
+                    style={styles.add_to_button}
+                    onPress = {() => this.save_unsave(this.props.id)}
+                >
                     <Text style={styles.button_text}>
                         {
-                            this.state.liked || true?
-                            <><Icon style={styles.button_text} name="heart"></Icon> Remove</>:
+                            (this.props.saved && this.props.saved.indexOf(this.props.id) == -1) ?
                             <><Icon style={styles.button_text} name="heart-outline"></Icon> Save</>
+                            : <><Icon style={styles.button_text} name="heart"></Icon> Remove</>
                         }
                     </Text>
                 </TouchableOpacity>
@@ -96,3 +126,16 @@ const styles = StyleSheet.create({
         textAlign: "center"
     }
 });
+
+const mapStateToProps = (state) => {
+    return {"saved" : state.save.saved}
+};
+  
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addToSaved : (recipeId) => dispatch(save(recipeId)),
+        removeFromSaved: (recipeId) => dispatch(remove(recipeId)),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Viewer)

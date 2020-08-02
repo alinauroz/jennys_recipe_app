@@ -4,9 +4,13 @@ import {Text, ScrollView, View, Dimensions, StyleSheet, Alert} from 'react-nativ
 import RecipeCard from '../cards/recipe'
 import Viewer from './Viewer'
 
-import data from '../../constants/recipies'
+import {data} from '../../constants/recipies'
 
-export default class Recipies extends React.Component<any, any> {
+import {connect} from 'react-redux'
+
+import {save} from '../../actions/save_action.js'
+
+class Recipies extends React.Component<any, any> {
     
     constructor(props: any) {
         super(props)
@@ -20,6 +24,7 @@ export default class Recipies extends React.Component<any, any> {
             show_name: recipie.name,
             show_cover: recipie.image,
             show_direction: recipie.recipie,
+            show_id: recipie.id,
             view_recipie: true
         })
     }
@@ -61,7 +66,9 @@ export default class Recipies extends React.Component<any, any> {
                     title = {this.state.show_name}
                     cover = {this.state.show_cover}
                     directions = {this.state.show_direction}
+                    id = {this.state.show_id}
                     hide = {this.hideRecipieViewer}
+                    saved = {this.props.saved}
                 />
             </ScrollView>
             </>
@@ -82,3 +89,15 @@ const styles = StyleSheet.create({
         margin: 10
     }
 })
+
+const mapStateToProps = (state:any) => {
+    return {"saved" : state.save.saved}
+};
+  
+const mapDispatchToProps = (dispatch:any) => {
+    return {
+        addToSaved : (recipeId:any) => dispatch(save(recipeId))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Recipies)

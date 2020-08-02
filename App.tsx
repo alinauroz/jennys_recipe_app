@@ -8,9 +8,12 @@ import Explore from './components/activities/Explore'
 import Recipies from './components/activities/Recipies'
 import Upload from './components/activities/Upload'
 import Viewer from './components/activities/Viewer'
+import Account from './components/activities/Account'
 
 import data from './constants/recipies'
 
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
 
 
 const styles = StyleSheet.create({  
@@ -39,7 +42,7 @@ const TabNavigator = createMaterialBottomTabNavigator(
                         <Icon style={[{color: tintColor}]} size={25} name={'ios-pizza'}/>  
                     </View>),
             }  
-        },  
+        },   
         Image: { screen: Upload,
             navigationOptions:{
                 tabBarLabel:'Upload',  
@@ -48,8 +51,16 @@ const TabNavigator = createMaterialBottomTabNavigator(
                         <Icon style={[{color: tintColor}]} size={25} name={'ios-arrow-up'}/>  
                     </View>)
             }  
-        },  
-        
+        },
+        Account: { screen: Account,
+            navigationOptions:{  
+                tabBarLabel:'Account',  
+                tabBarIcon: ({ tintColor }) => (  
+                    <View>  
+                        <Icon style={[{color: tintColor}]} size={25} name={'ios-person'}/>  
+                    </View>),
+            }  
+        }, 
     },  
     {  
       initialRouteName: "Home",  
@@ -58,15 +69,18 @@ const TabNavigator = createMaterialBottomTabNavigator(
       barStyle: { backgroundColor: '#3BAD87' },  
     },  
 );  
-  
-export default createAppContainer(TabNavigator);  
 
-//export default class App extends React.Component {
-//    render () {
-//        return <Viewer
-//            cover={data[0].image}
-//            title = {"White Tea"}
-//        />
-//    }
-//}
+const mapStateToProps = (state: any) => {
+
+};
+  
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+      
+  }
+}
+
+//export default createAppContainer(TabNavigator);  
+
+export default connect(mapStateToProps, mapDispatchToProps)(createAppContainer(TabNavigator))
 

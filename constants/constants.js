@@ -1,2 +1,3 @@
-export default ADD_RECIPIE = "ADD_RECIPIE"
-export default SAVE_RECIPIE = "SAVE_RECIPIE"
+export const SAVE_RECIPIE = "SAVE_RECIPIE"
+export const REMOVE_RECIPIE = "REMOVE_RECIPIE"
+export const ACCOUNT = "ACCOUNT"

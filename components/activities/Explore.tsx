@@ -1,9 +1,13 @@
 import React from 'react'
 import {View, ScrollView, Text, TextInput, StyleSheet, Dimensions, Alert} from 'react-native'
 
-import data from "../../constants/recipies"
+import {data} from "../../constants/recipies"
 import RecipeCard from '../cards/recipe'
 import Viewer from './Viewer'
+
+import {connect} from 'react-redux'
+
+import {save} from '../../actions/save_action.js'
 
 interface RecipieInterface {
     name: string,
@@ -21,7 +25,7 @@ interface ExploreInterface {
     show_direction: string
 }
 
-export default class Explore extends React.Component <ExploreInterface, ExploreInterface> {
+class Explore extends React.Component <ExploreInterface, ExploreInterface> {
     
     constructor(props: any) {
         super(props)
@@ -132,3 +136,15 @@ const styles = StyleSheet.create({
         margin: 10
     }
 });
+
+const mapStateToProps = (state:any) => {
+    return {"saved" : state.saved}
+};
+  
+const mapDispatchToProps = (dispatch:any) => {
+    return {
+        addToSaved : (recipeId:any) => dispatch(save(recipeId))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Explore)
