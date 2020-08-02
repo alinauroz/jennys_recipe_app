@@ -25,13 +25,15 @@ class Viewer extends React.Component {
         return newProps
     }
 
-    save_unsave = (id) => {
+    save_unsave = async (id) => {
+
         if (this.props.saved && this.props.saved.indexOf(this.props.id) == -1) {
-            console.log("saving")
             this.props.addToSaved(id);
+            this.setState({fav: true})
         }
         else {
             this.props.removeFromSaved(id);
+            this.setState({fav: false})
         }
         this.render()
     }
@@ -46,6 +48,15 @@ class Viewer extends React.Component {
     }
 
     render () {
+
+
+        if(this.props.saved && this.props.saved.indexOf(this.props.id) == -1) {
+            this.state.fav = false;
+        }
+        else{
+            this.state.fav = true;
+        }
+
         return (
             <ScrollView style={styles.container}>
                 <Text onPress = {this.props.hide} style={styles.back}>Back</Text>
@@ -64,7 +75,7 @@ class Viewer extends React.Component {
                 >
                     <Text style={styles.button_text}>
                         {
-                            (this.props.saved && this.props.saved.indexOf(this.props.id) == -1) ?
+                            (! this.state.fav) ?
                             <><Icon style={styles.button_text} name="heart-outline"></Icon> Save</>
                             : <><Icon style={styles.button_text} name="heart"></Icon> Remove</>
                         }
