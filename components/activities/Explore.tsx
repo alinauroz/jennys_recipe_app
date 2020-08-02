@@ -1,13 +1,15 @@
 import React from 'react'
 import {View, ScrollView, Text, TextInput, StyleSheet, Dimensions, Alert} from 'react-native'
 
-import {data} from "../../constants/recipies"
+import {get} from "../../constants/recipies"
 import RecipeCard from '../cards/recipe'
 import Viewer from './Viewer'
 
 import {connect} from 'react-redux'
 
 import {save} from '../../actions/save_action.js'
+
+let data:any = [];
 
 interface RecipieInterface {
     name: string,
@@ -37,6 +39,12 @@ class Explore extends React.Component <ExploreInterface, ExploreInterface> {
             show_direction: "abc",
             show_name: "abc"
         }
+    }
+
+    componentDidMount = async () => {
+        data = await get();
+        console.log("fffffff")
+        console.log(data)
     }
 
     search = async () => {
