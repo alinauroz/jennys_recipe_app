@@ -10,6 +10,11 @@ class Upload extends React.Component {
     
     constructor(props) {
         super(props)
+        this.state = {
+            name: "",
+            image: "",
+            recipe_to_upload: ""
+        }
     }
 
     setName = (name) => {
@@ -25,19 +30,35 @@ class Upload extends React.Component {
     }
 
     upload = async () => {
-        
+        try {
         if (this.props.token == "") {
             alert("Login to Upload Recipe");
             return;
         }
 
+        alert(this.props.token)
+
         let res_ = await fetch("http://localhost:8080/save?"
             + "name=" + this.state.name
-            + "image=" + this.state.image
-            + "recipe=" + this.state.recipe_to_upload 
+            + "&image=" + this.state.image
+            + "&recipe=" + this.state.recipe_to_upload 
+            + "&token=" + this.props.token
         );
 
         res_ = await res_.json();
+
+        
+        if (res_.err) {
+            this.setState({msg: "Invalid User, Login to continue"})
+        }
+        else {
+            this.setState({msg: "Recipe added successfully"})
+        }
+
+        }
+        catch (err) {
+            console.log(err)
+        }
 
     }
 
@@ -62,6 +83,11 @@ class Upload extends React.Component {
                     multiline={true}
                     numberOfLines={4}
                 />
+
+                <Text style={{marginTop: 10}}>
+                    {this.state.msg}
+                </Text>
+
                 <TouchableOpacity
                         style={styles.login_button}
                         onPress = {this.upload}
