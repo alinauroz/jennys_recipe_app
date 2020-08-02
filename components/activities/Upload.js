@@ -48,23 +48,22 @@ class Upload extends React.Component {
                 <TextInput
                     style={styles.input}
                     placeholder="Recipe Name"
-                    onChangeText = {""}
+                    onChangeText = {this.setName}
                 />
                 <TextInput
                     style={styles.input}
                     placeholder="Recipe Image URL"
-                    onChangeText = {""}
+                    onChangeText = {this.setImage}
                 />
                 <TextInput
                     style={{...styles.input, height: 200, textAlignVertical: 'top', flex: 1}}
                     placeholder={ "Recipe \n Use Markdown"}
-                    onChangeText = {""}
+                    onChangeText = {this.setRecipe}
                     multiline={true}
                     numberOfLines={4}
                 />
                 <TouchableOpacity
                         style={styles.login_button}
-                        //onPress = {() => this.props.updateToken(this.state.username + " " + this.state.pass)}
                         onPress = {this.upload}
                     >
                         <Text style={styles.login_button_text}>Upload</Text>
