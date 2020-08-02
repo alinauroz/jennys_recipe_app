@@ -5,6 +5,7 @@ const initialState = {
 }
 
 export default accountReducer = (state = initialState, action) => {
+    console.log(state)
     switch (action.type) {
         case ACCOUNT: {
             return {...state, token : action.payload}

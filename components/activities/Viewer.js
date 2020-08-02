@@ -13,7 +13,7 @@ class Viewer extends React.Component {
         this.state = {
             title: this.props.title,
             cover: this.props.cover,
-            fav: (this.props.saved && this.props.saved.indexOf(props.id) > -1 ? true : false),
+            fav: (this.props.saved && this.props.saved.indexOf(props.id) >= -1 ? true : false),
             saved: this.props.saved
         }
     }
@@ -26,20 +26,23 @@ class Viewer extends React.Component {
     }
 
     save_unsave = (id) => {
-        if (! this.state.fav) {
+        if (this.props.saved && this.props.saved.indexOf(this.props.id) == -1) {
+            console.log("saving")
             this.props.addToSaved(id);
-            this.setState({fav: true});
         }
         else {
             this.props.removeFromSaved(id);
-            this.setState({fav: false});
         }
+        this.render()
     }
 
     getButton = () => {
-        return this.props.saved && this.props.saved.indexOf(this.props.id) > -1 ?
-                            <><Icon style={styles.button_text} name="heart"></Icon> Remove</>:
+        console.log("**************")
+        console.log(this.props.saved.indexOf(this.props.id), this.props.saved)
+        console.log("_______________")
+        return this.props.saved && this.props.saved.indexOf(this.props.id) == -1 ?
                             <><Icon style={styles.button_text} name="heart-outline"></Icon> Save</>
+                            : <><Icon style={styles.button_text} name="heart"></Icon> Remove</>
     }
 
     render () {
@@ -61,7 +64,9 @@ class Viewer extends React.Component {
                 >
                     <Text style={styles.button_text}>
                         {
-                            this.getButton()
+                            (this.props.saved && this.props.saved.indexOf(this.props.id) == -1) ?
+                            <><Icon style={styles.button_text} name="heart-outline"></Icon> Save</>
+                            : <><Icon style={styles.button_text} name="heart"></Icon> Remove</>
                         }
                     </Text>
                 </TouchableOpacity>
@@ -123,7 +128,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-    return {"saved" : state.saved}
+    return {"saved" : state.save.saved}
 };
   
 const mapDispatchToProps = (dispatch) => {

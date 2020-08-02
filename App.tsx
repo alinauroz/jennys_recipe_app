@@ -71,14 +71,14 @@ const TabNavigator = createMaterialBottomTabNavigator(
 );  
 
 const mapStateToProps = (state: any) => {
-    return {count: state.count}
-  };
+
+};
   
-  const mapDispatchToProps = (dispatch: any) => {
-    return {
-        
-    }
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+      
   }
+}
 
 //export default createAppContainer(TabNavigator);  
 

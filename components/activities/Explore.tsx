@@ -1,7 +1,7 @@
 import React from 'react'
 import {View, ScrollView, Text, TextInput, StyleSheet, Dimensions, Alert} from 'react-native'
 
-import data from "../../constants/recipies"
+import {data} from "../../constants/recipies"
 import RecipeCard from '../cards/recipe'
 import Viewer from './Viewer'
 

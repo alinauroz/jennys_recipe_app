@@ -4,7 +4,7 @@ import {Text, ScrollView, View, Dimensions, StyleSheet, Alert} from 'react-nativ
 import RecipeCard from '../cards/recipe'
 import Viewer from './Viewer'
 
-import data from '../../constants/recipies'
+import {data} from '../../constants/recipies'
 
 import {connect} from 'react-redux'
 
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = (state:any) => {
-    return {"saved" : state.saved}
+    return {"saved" : state.save.saved}
 };
   
 const mapDispatchToProps = (dispatch:any) => {

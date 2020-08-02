@@ -1,4 +1,4 @@
-export default data = [
+export const data = [
     {
         id: 1,
         name: "Tea",
@@ -39,3 +39,10 @@ export default data = [
                 + "Strain through a `muslin’ cloth check the seasoning and serve in bowls garnished with some reserved dices of chargrilled pepper and lamb.\n\n"
     }
 ]
+
+export const get = async () => {
+    let data = await fetch("http://localhost:8080/");
+    data = await data.json();
+    console.log(data)
+    return data;
+}
