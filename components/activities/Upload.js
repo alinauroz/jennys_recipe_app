@@ -1,5 +1,5 @@
 import React from 'react'
-import {Text, ScrollView, StyleSheet, Dimensions, TouchableOpacity} from 'react-native'
+import {Text, ScrollView, StyleSheet, Dimensions, TouchableOpacity, Alert} from 'react-native'
 
 import {connect} from 'react-redux'
 
@@ -13,7 +13,10 @@ class Upload extends React.Component {
     }
 
     upload = () => {
-
+        if (this.props.token == "") {
+            alert("Login to Upload Recipe");
+            return;
+        }
     }
 
     render () {
@@ -82,7 +85,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-    return {"saved" : state.saved}
+    return {"token" : state.account_reducer.token}
 };
   
 const mapDispatchToProps = (dispatch) => {
