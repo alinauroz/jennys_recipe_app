@@ -12,11 +12,33 @@ class Upload extends React.Component {
         super(props)
     }
 
-    upload = () => {
+    setName = (name) => {
+        this.setState({name})
+    }
+
+    setImage = (image) => {
+        this.setState({image})
+    }
+
+    setRecipe = (recipe_to_upload) => {
+        this.setState({recipe_to_upload})
+    }
+
+    upload = async () => {
+        
         if (this.props.token == "") {
             alert("Login to Upload Recipe");
             return;
         }
+
+        let res_ = await fetch("http://localhost:8080/save?"
+            + "name=" + this.state.name
+            + "image=" + this.state.image
+            + "recipe=" + this.state.recipe_to_upload 
+        );
+
+        res_ = await res_.json();
+
     }
 
     render () {
