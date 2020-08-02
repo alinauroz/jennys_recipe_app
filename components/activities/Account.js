@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { TextInput, Text, View, StyleSheet, Dimensions, TouchableOpacity } from 'react-native'
+import { TextInput, Text, View, StyleSheet, Dimensions, TouchableOpacity, Alert } from 'react-native'
 
 import {connect} from 'react-redux'
 import {accountAction} from '../../actions/account_action'
@@ -13,8 +13,17 @@ class Account extends React.Component {
         }
     }
 
-    login = async (username, password) => {
-
+    login = async () => {
+        let username = this.state.username;
+        let password = this.state.pass;
+        let token = await fetch("http://localhost:8080/login?username=" + username + "&pass=" + password);
+        token = await token.json();
+        if (token.err) {
+            this.setState({msg: "Invalid username or password"})
+        }
+        else{
+            this.props.updateToken(token.token)
+        }
     }
 
     setUsername = (text) => {
@@ -42,11 +51,12 @@ class Account extends React.Component {
                     />
                     <TouchableOpacity
                         style={styles.login_button}
-                        onPress = {() => this.props.updateToken(this.state.username + " " + this.state.pass)}
+                        //onPress = {() => this.props.updateToken(this.state.username + " " + this.state.pass)}
+                        onPress = {this.login}
                     >
                         <Text style={styles.login_button_text}>Login</Text>
                     </TouchableOpacity>
-                    <Text>{this.props.token}</Text>
+                    <Text>{this.props.token +" "+ this.state.msg}</Text>
                 </View>
             )
         }
