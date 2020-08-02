@@ -38,15 +38,6 @@ class Viewer extends React.Component {
         this.render()
     }
 
-    getButton = () => {
-        console.log("**************")
-        console.log(this.props.saved.indexOf(this.props.id), this.props.saved)
-        console.log("_______________")
-        return this.props.saved && this.props.saved.indexOf(this.props.id) == -1 ?
-                            <><Icon style={styles.button_text} name="heart-outline"></Icon> Save</>
-                            : <><Icon style={styles.button_text} name="heart"></Icon> Remove</>
-    }
-
     render () {
 
 
