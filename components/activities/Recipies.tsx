@@ -4,7 +4,7 @@ import {Text, ScrollView, View, Dimensions, StyleSheet, Alert} from 'react-nativ
 import RecipeCard from '../cards/recipe'
 import Viewer from './Viewer'
 
-import {data} from '../../constants/recipies'
+import {data, get} from '../../constants/recipies'
 
 import {connect} from 'react-redux'
 
@@ -15,8 +15,15 @@ class Recipies extends React.Component<any, any> {
     constructor(props: any) {
         super(props)
         this.state = {
-            view_recipie: false
+            view_recipie: false,
+            data: []
         }
+    }
+
+    componentDidMount() {
+        get().then(data => {
+            this.setState({data})
+        })
     }
 
     showRecipie = async (recipie: any) => {
@@ -39,7 +46,7 @@ class Recipies extends React.Component<any, any> {
             <ScrollView style={{display: this.state.view_recipie ? "none" : "flex"}}>
             <View style={styles.container}>
                 {
-                    data.map(recipe => {
+                    this.state.data.map((recipe:any) => {
                         return (
                             <RecipeCard 
                                 cover={recipe.image}
